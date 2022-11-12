@@ -59,6 +59,8 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   },
   iconRate: {
+    flexDirection: 'column',
+    justifyContent: 'center',
     marginRight: 2
   },
   topHeaderFlex: {
