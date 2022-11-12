@@ -59,8 +59,6 @@ const styles = StyleSheet.create({
     paddingBottom: 8
   },
   iconRate: {
-    position: 'relative',
-    marginTop: -2,
     marginRight: 2
   },
   topHeaderFlex: {
