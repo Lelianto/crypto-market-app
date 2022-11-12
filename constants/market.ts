@@ -1,4 +1,5 @@
-export const headerSubMenus = [
+import { IHeaderSubMenu, ISortByText } from '../interfaces/General';
+export const headerSubMenus: IHeaderSubMenu[] = [
   {
     id: 1,
     name: 'New',
@@ -49,7 +50,7 @@ export const headerSubMenus = [
   }
 ];
 
-export const sortBy = [
+export const sortBy: ISortByText[] = [
   { key: 'Default', value: 'Default' },
   { key: 'Ascending', value: 'Ascending' },
   { key: 'Descending', value: 'Descending' }

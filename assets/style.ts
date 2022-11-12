@@ -92,12 +92,14 @@ const styles = StyleSheet.create({
   },
   subMenuSection: {
     height: 40,
-    paddingLeft: 20,
     paddingVertical: 5
+  },
+  leftMenuSection: {
+    width: 20
   },
   verticalCenter: {
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   menuButton: {
     flexDirection: 'column',
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: '#ebecf0'
   },
   menuButtonInner: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   buttonName: {
     marginLeft: 8

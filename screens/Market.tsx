@@ -3,11 +3,12 @@ import { Text, View, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import { ICurrencyGroup } from '../interfaces/SupportedCurrencies';
 import { supportedCurrenciesUrl, latestPriceApi } from '../apis/constants';
 import styles from '../assets/style';
-import { SvgUri } from 'react-native-svg';
 import { Icon } from 'react-native-elements';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { headerSubMenus, sortBy } from '../constants/market';
-import { isAndroid, getStatusBarHeight } from '../helper/deviceHelper';
+import CryptoList from '../components/CryptoList';
+import ProductSubMenu from '../components/ProductSubMenu';
+import { IHeaderSubMenu } from '../interfaces/General';
 
 const MarketScreen: FC = () => {
   const [currencyGroup, setCurrencyGroup] = useState<ICurrencyGroup[]>([]);
@@ -67,79 +68,12 @@ const MarketScreen: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currencyGroup]);
-  const renderListItems = ({ item }) => {
-    return (
-      <View style={styles.list}>
-        <View style={styles.flexRow}>
-          <View style={styles.currencyImage}>
-            <SvgUri width={40} height={40} color={item.color} uri={item.logo} />
-          </View>
-          <View style={styles.currencyText}>
-            <View>
-              <Text
-                style={[
-                  styles.textSpacing,
-                  styles.fontBold,
-                  styles.listFontSize
-                ]}
-              >
-                {item.name}
-              </Text>
-              <Text style={styles.listFontSize}>{item.currencyGroup}</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.priceCenter}>
-          <View style={styles.heightView}>
-            <Text
-              style={[
-                styles.textRight,
-                styles.textSpacing,
-                styles.fontBold,
-                styles.listFontSize
-              ]}
-            >
-              {item.latestPrice}
-            </Text>
-            <View style={styles.priceTag}>
-              <View style={styles.iconRate}>
-                <Icon
-                  name={`${Number(item.day) >= 0 ? 'caret-up' : 'caret-down'}`}
-                  size={20}
-                  color={`${Number(item.day) >= 0 ? 'green' : 'red'}`}
-                  type="font-awesome-5"
-                  tvParallaxProperties={undefined}
-                />
-              </View>
-              <Text style={[styles.textRight, styles.listFontSize]}>
-                {item.day}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </View>
-    );
-  };
-  const renderSubMenus = ({ name, id, iconName, type }) => {
-    return (
-      <View key={id} style={styles.menuButton}>
-        <View style={styles.menuButtonInner}>
-          <View style={styles.verticalCenter}>
-            <Icon
-              name={iconName}
-              size={15}
-              color="black"
-              type={type}
-              tvParallaxProperties={undefined}
-            />
-          </View>
-          <View style={styles.verticalCenter}>
-            <Text style={styles.buttonName}>{name}</Text>
-          </View>
-        </View>
-      </View>
-    );
-  };
+  const renderListItems = ({ item }) => <CryptoList {...item} />;
+  const renderSubMenus = (content: IHeaderSubMenu) => (
+    <View key={content.id} style={styles.menuButton}>
+      <ProductSubMenu {...content} />
+    </View>
+  );
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topHeaderFlex}>
@@ -171,6 +105,7 @@ const MarketScreen: FC = () => {
       </View>
       <View style={styles.subMenuSection}>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View style={styles.leftMenuSection} />
           {headerSubMenus.map((data) => renderSubMenus(data))}
         </ScrollView>
       </View>
