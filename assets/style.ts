@@ -27,9 +27,6 @@ const styles = StyleSheet.create({
   listFontSize: {
     fontSize: 16
   },
-  heightView: {
-    height: 46
-  },
   currencyImage: {
     flex: 1,
     flexDirection: 'column',

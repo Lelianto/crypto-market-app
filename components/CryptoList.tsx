@@ -23,7 +23,7 @@ const CryptoList: FC<ICurrencyGroup> = (item) => (
       </View>
     </View>
     <View style={styles.priceCenter}>
-      <View style={styles.heightView}>
+      <View>
         <Text
           style={[
             styles.textRight,
