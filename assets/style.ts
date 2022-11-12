@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   iconRate: {
     flexDirection: 'column',
     justifyContent: 'center',
-    marginRight: 2
+    marginRight: 4
   },
   topHeaderFlex: {
     flexDirection: 'row',
