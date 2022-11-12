@@ -4,10 +4,10 @@ import { ICurrencyGroup } from '../interfaces/SupportedCurrencies';
 import { supportedCurrenciesUrl, latestPriceApi } from '../apis/constants';
 import styles from '../assets/style';
 import { SvgUri } from 'react-native-svg';
-import { currencyFormatting } from '../formatter/currenciesFormatter';
 import { Icon } from 'react-native-elements';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { headerSubMenus, sortBy } from '../constants/market';
+import { isAndroid, getStatusBarHeight } from '../helper/deviceHelper';
 
 const MarketScreen: FC = () => {
   const [currencyGroup, setCurrencyGroup] = useState<ICurrencyGroup[]>([]);
@@ -24,9 +24,9 @@ const MarketScreen: FC = () => {
           if (data.length !== 0) {
             const { pair, latestPrice, day, week, month, year } = data[0];
             group.pair = pair;
-            group.latestPrice = currencyFormatting(Number(latestPrice))
-              .split('Rp')
-              .join('Rp ');
+            group.latestPrice = `Rp ${latestPrice
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
             group.price = latestPrice;
             group.day = day;
             group.week = week;
@@ -36,9 +36,9 @@ const MarketScreen: FC = () => {
           return group;
         });
         setCurrencyGroup(updatedData);
-				setTimeout(() => {
-					getLatestPriceChange()
-				}, 10000)
+        setTimeout(() => {
+          getLatestPriceChange();
+        }, 10000);
       }
     } catch (error) {
       console.error(error);
@@ -123,14 +123,20 @@ const MarketScreen: FC = () => {
   const renderSubMenus = ({ name, id, iconName, type }) => {
     return (
       <View key={id} style={styles.menuButton}>
-        <Icon
-          name={iconName}
-          size={15}
-          color="black"
-          type={type}
-          tvParallaxProperties={undefined}
-        />
-        <Text style={styles.buttonName}>{name}</Text>
+        <View style={styles.menuButtonInner}>
+          <View style={styles.verticalCenter}>
+            <Icon
+              name={iconName}
+              size={15}
+              color="black"
+              type={type}
+              tvParallaxProperties={undefined}
+            />
+          </View>
+          <View style={styles.verticalCenter}>
+            <Text style={styles.buttonName}>{name}</Text>
+          </View>
+        </View>
       </View>
     );
   };

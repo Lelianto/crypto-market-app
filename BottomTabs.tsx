@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
 import MarketScreen from './screens/Market';
+import { isAndroid } from './helper/deviceHelper';
 
 const Tab = createBottomTabNavigator();
 
@@ -49,7 +50,7 @@ const BottomTabs: FC = () => {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'gray',
         headerShown: false,
-        tabBarStyle: { height: 90 },
+        tabBarStyle: { height: isAndroid() ? 60 :90 },
         tabBarLabelStyle: { fontSize: 14 }
       })}
     >

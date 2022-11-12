@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native';
+import { isAndroid, getStatusBarHeight } from '../helper/deviceHelper';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingTop: isAndroid() ? getStatusBarHeight(true) : 0
   },
   containerList: {
     flex: 1,
@@ -93,14 +95,21 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingVertical: 5
   },
+  verticalCenter: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   menuButton: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
     paddingHorizontal: 10,
-    paddingVertical: 5,
     borderRadius: 20,
     marginRight: 5,
     borderWidth: 1,
     borderColor: '#ebecf0'
+  },
+  menuButtonInner: {
+    flexDirection: 'row',
   },
   buttonName: {
     marginLeft: 8
